@@ -1,4 +1,9 @@
 {
+  "name": "@zibanpirate/image",
+  "version": "0.1.0",
+  "exports":{
+    "./mod.ts": "./mod.ts"
+  },
   "tasks": {
     "wasmbuild": "deno run -A jsr:@deno/wasmbuild@0.17.2",
     "build_watch": "cargo watch --workdir rs_lib -- deno run wasmbuild",
