@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "wasmbuild": "deno run -A jsr:@deno/wasmbuild@0.17.2",
+    "build_watch": "cargo watch --workdir rs_lib -- deno run wasmbuild",
+    "test_rust_watch": "cargo watch --workdir rs_lib -- cargo test",
+    "test_ts": "deno test --allow-read --allow-write"
+  }
+}
