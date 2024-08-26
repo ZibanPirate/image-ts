@@ -7,7 +7,12 @@ use wasm_bindgen::prelude::*;
 
 // resize image with object-fit: cover
 #[wasm_bindgen]
-pub fn resize_image(image_binary: Vec<u8>, width: u32, height: u32) -> Vec<u8> {
+pub fn resize_image(
+  image_binary: Vec<u8>,
+  width: u32,
+  height: u32,
+  extension: &str,
+) -> Vec<u8> {
   let image = image::load_from_memory(&image_binary).unwrap();
 
   let original_aspect_ratio = image.width() as f32 / image.height() as f32;
@@ -42,7 +47,10 @@ pub fn resize_image(image_binary: Vec<u8>, width: u32, height: u32) -> Vec<u8> {
 
   let mut result_image_binary = Cursor::new(Vec::new());
   image
-    .write_to(&mut result_image_binary, ImageFormat::Png)
+    .write_to(
+      &mut result_image_binary,
+      ImageFormat::from_extension(extension).unwrap(),
+    )
     .unwrap();
 
   result_image_binary.into_inner()
@@ -54,11 +62,12 @@ mod tests {
 
   #[test]
   fn test_resize_image() {
+    let image_extension = "png";
     let image_binary = include_bytes!("../../../test/sample_1.png").to_vec();
     let width = 300;
     let height = 100;
 
-    let result = resize_image(image_binary, width, height);
+    let result = resize_image(image_binary, width, height, image_extension);
 
     use std::fs::File;
     use std::io::prelude::*;

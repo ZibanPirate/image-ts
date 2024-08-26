@@ -33,9 +33,10 @@ export function instantiateWithInstance(opts?: InstantiateOptions): Promise<Inst
 * @param {Uint8Array} image_binary
 * @param {number} width
 * @param {number} height
+* @param {string} extension
 * @returns {Uint8Array}
 */
-export function resize_image(image_binary: Uint8Array, width: number, height: number): Uint8Array;
+export function resize_image(image_binary: Uint8Array, width: number, height: number, extension: string): Uint8Array;
 /**
 * Chroma subsampling format
 */
